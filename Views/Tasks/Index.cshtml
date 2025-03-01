@@ -1,0 +1,40 @@
+@model IEnumerable<TaskManagementSystem.Models.TaskItem>
+
+@{
+    ViewData["Title"] = "Tasks";
+    Layout = "_Layout"; // Use your layout file
+}
+<h2>Tasks</h2>    
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Due Date</th>
+            <th>Assigned To</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model)
+        {
+            <tr>
+                <td>@task.Title</td>
+                <td>@task.Description</td>
+                <td>@task.Status</td>
+                <td>@task.DueDate.ToShortDateString()</td>
+                <td>@task.AssignedTo</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@task.Id">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@task.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
